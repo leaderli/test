@@ -10,6 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 public class First extends HttpServlet {
     public String home(HttpServletRequest request, HttpServletResponse response){
         System.out.println("first");
-        return "@nav.html";
+        return "nav.html";
     }
 }

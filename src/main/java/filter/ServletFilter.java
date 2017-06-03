@@ -2,6 +2,7 @@ package filter;
 
 import util.Constant;
 
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
@@ -9,8 +10,8 @@ import java.io.IOException;
 /**
  * Created by li on 6/1/17.
  */
-//@WebFilter(filterName = "c", urlPatterns = "/*")
-public class TheLastFilter implements javax.servlet.Filter {
+@WebFilter(urlPatterns = "/*")
+public class ServletFilter implements javax.servlet.Filter {
     public void destroy() {
     }
 
