@@ -42,6 +42,7 @@ public class BaseServlet extends HttpServlet {
         String servletName = servlets.get(paths[0].toLowerCase());
         if(servletName==null){
            redirectByCase(req,resp,"");
+           return;
         }
         String methodName = "home";
         uri = StringUtils.substringAfterLast(uri, "/").toLowerCase();
