@@ -6,8 +6,11 @@ import java.util.Stack;
  * @author li
  */
 public class Xpath {
-	private static final char SEPARATOR = '/';
+	public static final char SEPARATOR = '/';
 
+	/**
+	 * 用两个栈来实现解析表达式,表达式以{@link Xpath.SEPARATOR}分割
+	 */
 	public static Stack<String> lexical(String expression) {
 		if (expression.charAt(0) != SEPARATOR) {
 			throw new RuntimeException(expression + " should start with " + SEPARATOR);
@@ -28,4 +31,7 @@ public class Xpath {
 		}
 		return operation;
 	}
+	/**
+	 *  支持按＊查找，＊通配任意符合条件的key
+	 */
 }
