@@ -3,7 +3,6 @@ package util;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,7 @@ import java.util.Map;
 /**
  * Created by li on 6/1/17.
  */
-@WebServlet(urlPatterns = Constant.BaseServletURL + "/*")
+//@WebServlet(urlPatterns = Constant.BaseServletURL + "/*")
 public class BaseServlet extends HttpServlet {
     private final static Map<String, String> servlets = new HashMap<>();
     private final static String dirPath = "servlet";
@@ -40,12 +39,11 @@ public class BaseServlet extends HttpServlet {
         uri = StringUtils.substringAfter(uri, Constant.BaseServletURL + "/");
         String[] paths = uri.split("/");
         String servletName = servlets.get(paths[0].toLowerCase());
-        if(servletName==null){
-           redirectByCase(req,resp,"");
-           return;
+	    if (servletName == null) {
+		    redirectByCase(req, resp, "");
+		    return;
         }
         String methodName = "home";
-        uri = StringUtils.substringAfterLast(uri, "/").toLowerCase();
         try {
             Object o = Class.forName(servletName).newInstance();
             if (paths.length > 1) {
@@ -60,7 +58,7 @@ public class BaseServlet extends HttpServlet {
     }
 
     private void redirectByCase(HttpServletRequest req, HttpServletResponse resp, String redirect) throws ServletException, IOException {
-        redirect ="/" +redirect;
+	    redirect = "/" + redirect;
         System.out.println(redirect);
         req.getRequestDispatcher(redirect).forward(req, resp);
     }
