@@ -115,12 +115,14 @@ public class StackUtil {
                 case -2:
                     operation.push(c);
                     break;
+              //右括号则弹出操作栈压入表达式栈，直到遇到左括号，左括号不压入表达式栈
                 case -1:
                     char pop;
                     while ((pop = operation.pop()) != '(') {
                         expression.push(pop + "");
                     }
                     break;
+              //数字直接压入表达式栈，若上一次压入表达式的是数字，则弹出表达式栈相加后压入表达式栈
                 case 0:
                     if (lastCharacter == 0) {
                         expression.push(expression.pop() + c);
@@ -129,11 +131,18 @@ public class StackUtil {
                     }
                     break;
                 case 1:
+                  //操作栈顶元素为空或'('，压入操作栈
+                  //若当前操作a优先级大于操作栈顶b，则压入
+                  //否则弹出操作操作栈顶b，压入表达式栈，继续判断栈顶，直到遇到栈顶b优先级小于栈顶
+                  //或栈为空或'('
                 case 2:
                     char peek;
 
                     while (!operation.isEmpty()) {
                         peek = operation.peek();
+                      if (peek == '(') {
+                        break;
+                      }
                         if (LEVEL.get(peek) < level) {
                             break;
                         }
